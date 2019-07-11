@@ -8,9 +8,32 @@ class Game{
 
     constructor() {
         this.missed = 0;
-        this.phrases = this.createPhrases();
-        this.activePhrase = null;
+        this.phrases = [
+            new Phrase("Your smile is an umbrella"),
+            new Phrase("Dont burn your bridges"),
+            new Phrase ("Blondes have more fun"),
+            new Phrase ("Home is where the heart is"),
+            new Phrase ("Dont count your chickens before they hatch")
+         ];
+         this.activePhrase = null;
+        
+
+ }
+        
+           
+            
+    
+    
+    getRandomPhrase() {
+    let number = Math.floor(Math.random() * Math.floor(this.phrases.length));
+    return this.phrases[number];
+    }
+    
 
 
 
- }}
+
+
+
+}
+ 
