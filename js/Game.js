@@ -19,17 +19,27 @@ class Game{
         
 
  }
-        
-           
-            
-    
     
     getRandomPhrase() {
-    let number = Math.floor(Math.random() * Math.floor(this.phrases.length));
-    return this.phrases[number];
+        let number = Math.floor(Math.random() * Math.floor(this.phrases.length));
+        return this.phrases[number];
     }
     
 
+     startGame() {
+
+        $("#overlay").hide();
+        this.getRandomPhrase()=this.activePhrase;
+        phrase= new Phrase(this.activePhrase)
+        phrase.addPhraseToDisplay();
+
+
+
+} ;   
+            
+    
+    
+    
 
 
 

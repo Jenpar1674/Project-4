@@ -10,6 +10,9 @@
 // };
 
 const game = new Game();
+game.startGame();
+console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
+
 // game.getRandomPhrase().addPhraseToDisplay();
 // logPhrase(game.getRandomPhrase());  
 // logPhrase(game.getRandomPhrase());
