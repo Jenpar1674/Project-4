@@ -34,12 +34,29 @@ class Game{
         
         this.activePhrase.addPhraseToDisplay();
 
-
-
 } ;   
             
     
-    
+    checkForWin(){
+
+
+    };
+
+
+    removeLife(){
+
+
+
+    };
+
+
+    gameOver(){
+
+
+
+
+
+    };
     
 
 
