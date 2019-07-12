@@ -9,8 +9,8 @@ class Game{
     constructor() {
         this.missed = 0;
         this.phrases = [
-            new Phrase("Your smile is an umbrella"),
-            new Phrase("Dont burn your bridges"),
+            new Phrase ("Your smile is an umbrella"),
+            new Phrase ("Dont burn your bridges"),
             new Phrase ("Blondes have more fun"),
             new Phrase ("Home is where the heart is"),
             new Phrase ("Dont count your chickens before they hatch")
@@ -28,8 +28,9 @@ class Game{
 
      startGame() {
 
-        $("#overlay").hide();
-        this.getRandomPhrase()=this.activePhrase;
+         const newLocal = this.getRandomPhrase();
+       $('#overlay').hide();
+        newLocal=this.activePhrase;
         phrase= new Phrase(this.activePhrase)
         phrase.addPhraseToDisplay();
 

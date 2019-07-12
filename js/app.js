@@ -8,6 +8,8 @@
 //     console.log(`Phrase - phrase: ${phrase.phrase}`);
 
 // };
+//let game = null;
+//let phrase = null;
 
 const game = new Game();
 game.startGame();
@@ -24,12 +26,12 @@ console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
 //add event listeners for the start button and onscreen keyboard buttons.
 
 
-// $('#btn__reset').on('click',()=>{
+//  $('#btn__reset').on('click',()=>{
 
-// });
-// $('#qwerty').on('click',()=>{
+//  });
+//  $('#qwerty').on('click',()=>{
 
-// });
+//  });
 //game.phrases.forEach((phrase, index)=>{
 
 
