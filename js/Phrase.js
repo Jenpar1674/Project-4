@@ -45,6 +45,11 @@
 
 	showMatchedLetter(){
 
+const letterBox = document.querySelectorAll(`.${letter}`);	
+		if(this.letterBox(letter)) {
+			for (let i = 0; i < this.letterBox.length; i++) {
+				letterBox[i].classList.add('show');	
+				letterBox[i].classList.remove('hide');	
 
 
 	};
@@ -65,4 +70,4 @@
 
 
 
- 
+	}}

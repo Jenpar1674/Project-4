@@ -38,30 +38,45 @@ class Game{
             
     
     checkForWin(){
-
-
-    };
-
-
-    removeLife(){
-
-
-
-    };
-
-
-    gameOver(){
-
-
-
-
+        let phraseLetter = $('.letter');	
+		let matchedLetter = $('.show');	
+        if(matchedLetter.length === phraseLetter.length) {
+            return true;
+        } else {
+            return false;
+        }
+	}	
 
     };
+
+
+    removeLife() ;{
+        this.missed += 1;
+		let liveHrt = $('.tries');
+		let liveHrtImg = liveHrt.firstChild;
+		liveHrt.classList.remove('tries');
+		liveHrtImg.src = "images/lostHeart.png";	
+		if(this.missed === 5) {
+			this.gameOver(false);
+		
+	}	
+
+
+    }
+
+
+    gameOver() ;{
+
+
+
+
+
+    };;;
     
 
 
 
 
 
-}
+
  
