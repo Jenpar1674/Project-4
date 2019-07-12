@@ -10,8 +10,8 @@
 // };
 //let game = null;
 //let phrase = null;
-
-const game = new Game();
+//let game;
+game = new Game ();
 game.startGame();
 console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
 
