@@ -3,42 +3,29 @@
  * app.js */
 
 
+const game = new Game();
+const startBtn = document.getElementById('btn__reset');
+const keyboardBtns = document.querySelectorAll('.key');
 
-let keyPres = []; 
-const $menu = $('#overlay');
-let $menuH1 = $('#overlay h1');
-const $keyButton = $('.key');
-
-//Starts Game
-
-$('#btn__reset').click( () => {
-  game = new Game();
+startBtn.addEventListener('click', () => {
   game.startGame();
-  console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
 });
 
-// Handles onscreen keyboard button clicks
-
-$keyButton.click( (e) => {
-  let button = e.target;
-  game.handleInteraction(button);
+keyboardBtns.forEach((key) => {
+  key.addEventListener('click', (evt) => {
+    const letter = evt.target;
+    game.handleInteraction(letter);
+  })
 });
 
-// Handles keyboard key release
+document.addEventListener('keyup', (e) => {
+  const key = e.key;
+  console.log(e);
+  keyboardBtns.forEach((btn) => {
+    if (key === btn.textContent) {
+      game.handleInteraction(btn);
+    }
+  });
+  
+});
 
-$(document).keyup( (e) => {
-  let keyPress = e.key;
-  if ( $menu.is(':visible') ) {
-    e.preventDefault;
-  }
-  else if ( !keyPressed.includes(keyPress) ) {
-    $keyButton.each( (index, key) => {
-      if ( $(key).text() === keyPress ) {
-        game.handleInteraction(key);
-      }
-    });
-    keyPressed.push(keyPress);
-  }
-
- 
-})
