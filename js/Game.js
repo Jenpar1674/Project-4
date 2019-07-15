@@ -3,7 +3,7 @@
  * Game.js */
 //Game.js to create a Game class with methods for starting and ending the game, handling interactions, getting a random phrase, checking for a win, and removing a life from the scoreboard.
  
-
+        //creates game class and phrases 
 class Game{
 
     constructor() {
@@ -20,224 +20,131 @@ class Game{
         
 
     }
+    
+
+    //randomly selects a phrase 
 
     getRandomPhrase() {
-        let randomIndex = Math.floor(Math.random() * this.phrases.length);
-        let randomPhrase = this.phrases[randomIndex];
-        return randomPhrase;
-      }
-      /*
-     * Begins game by transitioning from the overlay and selecting a random phrase
-     * and displaying it to user.  Also calls the game reset method and refreshes
-     * the keyPressed array to be empty, which prepares it to accept to new
-     * physical keyboard input entries from the user
-     */
+        let number = Math.floor(Math.random() * Math.floor(this.phrases.length));
+        return this.phrases[number];
+    }
+    
+
+
+     
+  // removes overlay and displays random phrase 
      startGame() {
-       $menu.slideUp();
-       game.gameReset();
-       keyPressed.length = 0;
-       this.activePhrase = this.getRandomPhrase();
-       this.activePhrase.addPhraseToDisplay();
-     }
-     /*
-     * Handles all user interaction and associated methods when a user
-     * selects a letter: captures letter, checks against phrase,
-     * displays if matched, removes life if not, checks if game is won,
-     * checks if game is over
-     */
-     handleInteraction(button) {
-         let $letter = $(button).text();
-         $(button).prop('disabled', true);
-         if ( this.activePhrase.checkLetter($letter) ) {
-           this.activePhrase.showMatchedLetter($letter);
-           $(button).addClass('chosen');
-         }
-         else {
-           this.removeLife();
-           $(button).addClass('wrong');
-         }
-         if ( this.checkForWin() ) {
-           this.gameOver();
-         }
-     }
-     /*
-     * Checks for winning move
-     * @return {boolean} True if game has been won, false if game wasn't
-     won
-     */
-     checkForWin() {
-      if ( $('.hide').length > 0 ) {
-        return false;
-      }
-      else {
-        return true;
-      }
+
+        $('#overlay').hide();
+        this.activePhrase = this.getRandomPhrase();
+        
+        this.activePhrase.addPhraseToDisplay();
+
+}   
+
+
+// Handles user interaction 
+
+handleInteraction(button) {
+    let $letter = $(button).text();
+    $(button).prop('disabled', true);
+    if ( this.activePhrase.checkLetter($letter) ) {
+      this.activePhrase.showMatchedLetter($letter);
+      $(button).addClass('chosen');
     }
-     /*
-     * Increases the value of the missed property
-     * Removes a life from the scoreboard
-     * Checks if player has remaining lives and ends game if player is out
-     * Method is constructed such that the life loss transition is from right to left
-     */
-     removeLife() {
-       this.missed += 1;
-       if ( this.missed == 1 ) {
-         $('.tries:eq(4) img').attr('src','images/lostHeart.png');
-       }
-       if ( this.missed == 2 ) {
-         $('.tries:eq(3) img').attr('src','images/lostHeart.png');
-       }
-       if ( this.missed == 3 ) {
-         $('.tries:eq(2) img').attr('src','images/lostHeart.png');
-       }
-       if ( this.missed == 4 ) {
-         $('.tries:eq(1) img').attr('src','images/lostHeart.png');
-       }
-       else if( this.missed == 5 ) {
-         $('.tries:eq(0) img').attr('src','images/lostHeart.png');
-         this.gameOver();
-       }
-     }
-     /*
-     * Displays game over message + effect transition
-     * @param {boolean} gameWon - Whether or not the user won the game
-     */
-     gameOver() {
-       $menu.slideDown();
-       if ( this.missed < 5 && this.checkForWin() ) {
-         $menu.removeClass('start').addClass('win').css("background-color", "#14a76c");
-         $menuH1.text('Congrats, you win!');
-       }
-       else {
-         $menu.removeClass('start').addClass('lose').css("background-color", "#D94545");;
-         $menuH1.text("You're out of lives, better luck next time!");
-       }
-       /*
-       * When game is complete, reset the game board so that clicking
-       * 'start game' will load a new game
-       */
-     }
-     gameReset() {
-       $('#phrase ul li').remove();
-       $keyButton.each( (index, key) => {
-         $(key).prop('disabled', false);
-         $(key).removeClass('chosen');
-         $(key).removeClass('wrong');
-         $(key).addClass('key');
-       });
-       $('.tries img').each( (index, img) => {
-         $(img).attr('src','images/liveHeart.png');
-       });
-       $menu.removeClass('win').removeClass('lose');
-     }
+    else {
+      this.removeLife();
+      $(button).addClass('wrong');
     }
-    
-//     getRandomPhrase() {
-//         let number = Math.floor(Math.random() * Math.floor(this.phrases.length));
-//         return this.phrases[number];
-//     }
+    if ( this.checkForWin() ) {
+      this.gameOver();
+    }
+}         
     
 
-//      startGame() {
+//checks for winning move
+    checkForWin(){
+        let phraseLetter = $('.letter');	
+		let matchedLetter = $('.show');	
+        if(matchedLetter.length === phraseLetter.length) {
+            return true;
+        } else {
+            return false;
+        }
+	}	
 
-//         $('#overlay').hide();
-//         this.activePhrase = this.getRandomPhrase();
+    
+//increases value of a missed property. removes a life from scoreboard.
+//checks for remaining lives and ends game if player is out
+
+    removeLife() {
+        this.missed += 1;
+        if ( this.missed == 1 ) {
+          $('.tries:eq(4) img').attr('src','images/lostHeart.png');
+        }
+        if ( this.missed == 2 ) {
+          $('.tries:eq(3) img').attr('src','images/lostHeart.png');
+        }
+        if ( this.missed == 3 ) {
+          $('.tries:eq(2) img').attr('src','images/lostHeart.png');
+        }
+        if ( this.missed == 4 ) {
+          $('.tries:eq(1) img').attr('src','images/lostHeart.png');
+        }
+        else if( this.missed == 5 ) {
+          $('.tries:eq(0) img').attr('src','images/lostHeart.png');
+          this.gameOver();
+        }
+      }
+
+
+//displays game over message
+    gameOver(gameWon) 
+        {
         
-//         this.activePhrase.addPhraseToDisplay();
+            $("#overlay").fadeIn("slow");
+        if (gameWon==="lost") {
 
-// }   
-// handleInteraction(button) {
-//     let $letter = $(button).text();
-//     $(button).prop('disabled', true);
-//     if ( this.activePhrase.checkLetter($letter) ) {
-//       this.activePhrase.showMatchedLetter($letter);
-//       $(button).addClass('chosen');
-//     }
-//     else {
-//       this.removeLife();
-//       $(button).addClass('wrong');
-//     }
-//     if ( this.checkForWin() ) {
-//       this.gameOver();
-//     }
-// }         
-    
-//     checkForWin(){
-//         let phraseLetter = $('.letter');	
-// 		let matchedLetter = $('.show');	
-//         if(matchedLetter.length === phraseLetter.length) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-// 	}	
+            $("#overlay h1").text('You Lose');
+            $("#overlay").addClass('lose').removeClass('start');
 
-    
+        }else if (gameWon==='won'){
+            $("#overlay h1").text('You Win')
+            $("#overlay").addClass('win').removeClass('start');
+        }
+        }
 
-//     removeLife() {
-//         this.missed += 1;
-//         if ( this.missed == 1 ) {
-//           $('.tries:eq(4) img').attr('src','images/lostHeart.png');
-//         }
-//         if ( this.missed == 2 ) {
-//           $('.tries:eq(3) img').attr('src','images/lostHeart.png');
-//         }
-//         if ( this.missed == 3 ) {
-//           $('.tries:eq(2) img').attr('src','images/lostHeart.png');
-//         }
-//         if ( this.missed == 4 ) {
-//           $('.tries:eq(1) img').attr('src','images/lostHeart.png');
-//         }
-//         else if( this.missed == 5 ) {
-//           $('.tries:eq(0) img').attr('src','images/lostHeart.png');
-//           this.gameOver();
-//         }
-//       }
-// //     removeLife()
-// // {
         
-// //         this.missed += 1;
-// // 		let liveHrt = document.querySelector('.tries');
-// // 		let liveHrtImg = liveHrt.firstChild;
-// // 		liveHrt.classList.remove('tries');
-// // 		liveHrtImg.src = "images/lostHeart.png";	
-// // 		if(this.missed === 5) {
-// // 			this.gameOver(false);
-		
-// //         }
 
+        resetGame () {
+            /* reset the gameboard between games: */
+            /* Reset the Start screen with original background color */
+            /* Remove all `li` elements from the Phrase `ul` element. */
+            /* Enable all of the onscreen keyboard buttons and update each to use the `key` CSS class, and not use the `chosen` or `wrong` CSS classes. */
+            /* Reset all of the heart images (i.e. the player's lives) in the scoreboard */
+            const startScreen = document.querySelector('#overlay');	
+            startScreen.classList.remove('win', 'lose');
+            startScreen.classList.add('start');
+            
+            const ul = document.querySelector('#phrase ul');	
+            ul.innerHTML = "";	
+            
+            const listKeys = document.querySelectorAll('.key');
+              for (let i = 0; i < listKeys.length; i++) {
+            listKeys[i].classList.remove('chosen', 'wrong');
+            listKeys[i].disabled = false;
+            }
+            
+            const hearts = document.querySelectorAll('#scoreboard ol li');
+            for (let i = 0; i < hearts.length; i++) {
+                if (hearts[i].classList != 'tries')	{
+                    hearts[i].classList.add('tries');
+                    hearts[i].firstChild.src = 'images/liveHeart.png';
+                }	   
+            }
+        }	
 
-// //     }
-
-
-//     gameOver(gameWon) 
-//         {
-        
-//             $("#overlay").fadeIn("slow");
-//         if (gameWon==="lost") {
-
-//             $("#overlay h1").text('You Lose');
-//             $("#overlay").addClass('lose').removeClass('start');
-
-//         }else if (gameWon==='won'){
-//             $("#overlay h1").text('You Win')
-//             $("#overlay").addClass('win').removeClass('start');
-//         }
-
-//         gameReset(){
-//             $('#phrase ul li').remove();
-//             $keyButton.each( (index, key) => {
-//               $(key).prop('disabled', false);
-//               $(key).removeClass('chosen');
-//               $(key).removeClass('wrong');
-//               $(key).addClass('key');
-//             });
-//             $('.tries img').each( (index, img) => {
-//               $(img).attr('src','images/liveHeart.png');
-//             });
-//             $menu.removeClass('win').removeClass('lose');
-//           }
-//          }
+    
           
         
 
@@ -248,4 +155,4 @@ class Game{
 
 
 
-// 
+    }

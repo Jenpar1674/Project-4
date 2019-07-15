@@ -3,6 +3,7 @@
  * Phrase.js */
 //Phrase.js to create a Phrase class to handle the creation of phrases.
 
+//creates Phrase class and sets phrases to lower case
 
  class Phrase{
     constructor(phrase){
@@ -23,10 +24,9 @@
 		  }
 		});
 	  }
-	  /*
-	  * Checks if passed letter is in phrase
-	  * @param (string) letter - Letter to check
-	  */
+	  
+	  //Checks if passed letter is in phrase
+	  
 	  checkLetter(letter) {
 		if ( this.phrase.includes(letter) ) {
 		  return true;
@@ -35,75 +35,13 @@
 		  return false;
 		}
 	  }
-	  /*
-	  * Displays passed letter on screen after a match is found
-	  * @param (string) letter - Letter to display
-	  */
+	  
+	  //Displays passed letter on screen after a match is found
+	
 	  showMatchedLetter(letter) {
 		let matchedLetterLIs = $(`.${letter}`);
 		matchedLetterLIs.removeClass('hide').addClass('show');
 	
 	  }
 	 }
-    //addPhraseToDisplay(){
-//       const ul = document.querySelector('#phrase ul');
-// 		ul.innerHTML = '';	// list contents
-// 		const piece = this.phrase.split("");	// by using an empty string ("") as the separator, the phrase is split between each character (including spaces), and the characters stored as an array in the "piece" variable.
-// 		piece.forEach( letter => {	
-//             let li = document.createElement('li');
-// 			let liText = document.createTextNode(letter);
-// 			li.appendChild(liText);
-// 			if (letter === ' ' ) {   
-//                li.classList.add('space');
-//             } else {
-// 				li.classList.add('hide', 'letter',`${letter}`);
-// 			}
-// 			// each character in the phrase is stored as a separate list element.
-// 			ul.appendChild(li);
-// 		});
-//     }
-
-	  
-// 	checkLetter(){
-
-// 		if(this.phrase.includes(letter)){
-//             return true;
-//         } else {
-//             return false;
-//         }
-	
-
-// 	};
-
-
-
-
-
-// 	showMatchedLetter(){
-
-// const letterBox = document.querySelectorAll(`.${letter}`);	
-// 		if(this.letterBox(letter)) {
-// 			for (let i = 0; i < this.letterBox.length; i++) {
-// 				letterBox[i].classList.add('show');	
-// 				letterBox[i].classList.remove('hide');	
-
-
-// 	};
-
-
-
-
-
-
-
-
-
-
-// }
- 
     
-
-
-
-
-// 	}}
