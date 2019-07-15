@@ -34,6 +34,7 @@ class Game {
       this.activePhrase = phrase;
       phrase.addPhraseToDisplay();
       overlay.style.display = "none";
+      document.body.style.background= 'url(https://media.giphy.com/media/U3qYN8S0j3bpK/giphy.gif)';
     }
   
    
